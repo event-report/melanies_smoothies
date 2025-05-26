@@ -1,3 +1,4 @@
+
 # Import python packages
 import streamlit as st
 #from snowflake.snowpark.context import get_active_session
@@ -24,7 +25,8 @@ if ingredient_list:
     ingredients_string = ''
     for x in ingredient_list:
         ingredients_string += x + ' '
-        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/watermelon")
+        st.subheader(x+'Nutrition Information') 
+        smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+x)
         sf_df = st.dataframe(data=smoothiefroot_response.json(),use_container_width=True)
     st.write(ingredients_string)
     my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
